@@ -13,3 +13,6 @@ Node.Js / Express / MongoDb / Mongoose / Joi / Celebrate
 
 - обратится к API можно по адрессу: http://api.movies41.students.nomoredomains.sbs/
 - адрес сервера 130.193.50.2
+
+## Статус
+- В разработке
