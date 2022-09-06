@@ -16,7 +16,7 @@ movieRoutes.post(
       image: Joi.string().required().pattern(linkRegular),
       trailerLink: Joi.string().required().pattern(linkRegular),
       thumbnail: Joi.string().required().pattern(linkRegular),
-      movieId: Joi.string().alphanum().length(24).hex(),
+      movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),

@@ -5,7 +5,6 @@ const User = require('../models/user');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const RepetitionError = require('../utils/RepetitionError');
 const BadRequestError = require('../utils/BadRequestError');
-const NotFoundError = require('../utils/NotFoundError');
 
 exports.getUserMe = (req, res, next) => {
   User.findById(req.user._id).then((user) => res.send({ user }))
@@ -14,19 +13,21 @@ exports.getUserMe = (req, res, next) => {
 
 exports.patchUser = (req, res, next) => {
   const { name, email } = req.body;
-  User.findByIdAndUpdate(
-    req.user._id,
-    { name, email },
-    {
-      new: true,
-      runValidators: true,
-    },
-  )
+  User.findOne({ email })
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь не найден');
+        User.findByIdAndUpdate(
+          req.user._id,
+          { name, email },
+          {
+            new: true,
+            runValidators: true,
+          },
+        )
+          .then((newUser) => res.send({ newUser }))
+          .catch(next);
       } else {
-        res.send({ user });
+        throw new RepetitionError('Данный Email уже занят');
       }
     })
     .catch(next);
