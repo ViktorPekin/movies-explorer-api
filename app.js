@@ -18,19 +18,9 @@ app.use(bodyParser.json());
 
 app.use(requestLogger);
 
-const allowedCors = [
-  'https://movies41.students.nomoredomains.sbs',
-  'http://movies41.students.nomoredomains.sbs',
-  'localhost:3000',
-];
-
 app.use((req, res, next) => {
-  const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  } else {
-    next();
-  }
+  res.header('Access-Control-Allow-Origin', '*');
+
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
