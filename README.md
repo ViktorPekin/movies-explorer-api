@@ -16,4 +16,4 @@ Node.Js / Express / MongoDb / Mongoose / Joi / Celebrate
 - адрес сервера 130.193.50.2
 
 ## Статус
-- В разработке
+- ✅ Завершен
